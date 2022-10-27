@@ -1,0 +1,38 @@
+---
+title: App Pattern - Common issues
+---
+
+### My app does not install
+
+- check if you can access app manifest in your browser. In case of app-template it's on `api/manifest`. When inspecting, use tunnel in case of devserver
+- navigate to dashboard and check if error message is available
+- use debug flag to log APL debug logs
+
+### Can't access app configuration
+
+- set up debug flag for the browser and confirm that bridge can establish the connection
+- check if requests on app configuration views are even triggered
+- HMR sometimes causes the app context to drop connection with the app bridge. Reload the page
+
+### Webhooks does not work
+
+- confirm that webhook is created and is active (thru gql api)
+- check if there are webhook invocations in the gql api
+- make sure that application has permissions to access data specified in the query
+- check if the subscription query is valid
+- check the server logs to check if webhook was not rejected by app validation
+- check webhook url (and server logs for 404 responses)
+- application was not reinstalled after change of the manifest
+
+### App can't query/mutate Saleor API
+
+- check if gql client has set up tokens
+- make sure you are sending queries to expected API endpoint
+- check if app token was properly saved by the
+- the app has not enough permissions
+
+### Dashboard extension does not work
+
+- reload browser, because available extensions are loaded when the dashboard starts up
+- make sure you are not using wrong app mounting point (link reference to Extensions app)
+- dashboard user does not have permission required by the extension
